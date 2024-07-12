@@ -4,7 +4,7 @@ import cookieParser from "cookie-parser"
 const app = express()
 
 app.use(cors({
-    origin: "http://localhost:5173", // or process.env.CORS_ORIGIN
+    origin: "https://video-fusion.vercel.app", // or process.env.CORS_ORIGIN //http://localhost:5173/api/v1/
     credentials: true
 }))
 
@@ -34,6 +34,6 @@ app.use("/api/v1/videos", videoRouter)
 app.use("/api/v1/comment", commentRouter)
 app.use("/api/v1/auth", authRouter)
 
-//http://localhost:5173/api/v1/
+
 
 export { app }  
