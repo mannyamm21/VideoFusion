@@ -38,10 +38,11 @@ const Logo = styled.div`
   gap: 5px;
   font-weight: bold;
   margin-bottom: 25px;
+  font-size: 22px;
 `;
 
 const Img = styled.img`
-  height: 25px;
+  height: 40px;
 `;
 
 const Item = styled.div`
@@ -79,7 +80,7 @@ export default function Menu({ darkMode, setDarkMode }) {
         <Link to="/" style={{ textDecoration: "none" }}>
           <Logo>
             <Img src={Logoo} />
-            YourTube
+            VideoFusion
           </Logo>
         </Link>
         <Link to="/" style={{ textDecoration: "none" }}>
