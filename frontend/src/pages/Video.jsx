@@ -18,7 +18,7 @@ import { subscription, addSavedVideo } from "../Context/userSlice";
 import { styled } from "@mui/material/styles";
 import { red, grey } from "@mui/material/colors";
 import Button from "@mui/material/Button";
-import ShareModal from "../components/ShareModal"; // Import the ShareModal
+import ShareModal from "../components/ShareModal";
 
 const Container = styled1.div`
   display: flex;
