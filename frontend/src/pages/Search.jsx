@@ -35,33 +35,24 @@ export default function Search() {
 
   return (
     <Container>
-      {videos.map((video) => {
-        return (
-          <>
-            <Card key={video._id} video={video} />
-          </>
-        );
-      })}
+      {videos.map((video) => (
+        <Card key={video._id} video={video} />
+      ))}
 
       {users.map((user) => (
-        <>
-          <ChannelCard
-            key={user._id}
-            channelId={user._id}
-            avatar={user.avatar}
-            channelName={user.name}
-            username={user.username}
-            videoCount={user.videos.length}
-            subscriber={user.subscribers}
-          />
-        </>
+        <ChannelCard
+          key={user._id}
+          channelId={user._id}
+          avatar={user.avatar}
+          channelName={user.name}
+          username={user.username}
+          videoCount={user.videos.length}
+          subscriber={user.subscribers}
+        />
       ))}
-      <div></div>
 
       {users.map((user) =>
-        user.videos.map((video) => (
-          <VideoCard key={video._id} videoId={video} />
-        ))
+        user.videos.map((video) => <VideoCard key={video} videoId={video} />)
       )}
     </Container>
   );

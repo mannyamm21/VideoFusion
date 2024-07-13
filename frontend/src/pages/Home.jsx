@@ -9,10 +9,11 @@ const Container = styled.div`
   flex-wrap: wrap;
 `;
 
-export default function Home({ type }) {
+export default function Home({ type = "random" }) {
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
+    console.log("Fetching videos of type:", type);
     const fetchVideos = async () => {
       try {
         const res = await axios.get(`/videos/${type}`);

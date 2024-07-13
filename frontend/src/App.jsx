@@ -14,7 +14,7 @@ import { useSelector } from "react-redux";
 import Categories from "./pages/Categories";
 import SavedVideo from "./components/SavedVideo";
 
-axios.defaults.baseURL = "http://localhost:5000/api/v1";   //http://localhost:5000/api/v1
+axios.defaults.baseURL = "http://localhost:5000/api/v1"; //http://localhost:5000/api/v1
 axios.defaults.withCredentials = true;
 
 const Container = styled.div`
@@ -44,7 +44,7 @@ function App() {
             <Wrapper>
               <Routes>
                 <Route path="/">
-                  <Route index element={<Home type="random" />} />
+                  <Route index element={<Home />} />
                   <Route path="/profile/:userId" element={<Profile />} />
                   <Route path="trend" element={<Home type="trend" />} />
                   <Route path="sub" element={<Home type="sub" />} />

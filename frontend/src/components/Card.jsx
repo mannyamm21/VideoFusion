@@ -64,7 +64,7 @@ const Card = ({ type, video }) => {
           const res = await axios.get(`/users/find/${video.userId}`);
           setChannel(res.data);
         } catch (error) {
-          console.error(error);
+          console.error("Error fetching channel:", error); // Log the error
         }
       }
     };
@@ -74,6 +74,7 @@ const Card = ({ type, video }) => {
   if (!video) {
     return null;
   }
+
   return (
     <Link to={`/video/${video?._id}`} style={{ textDecoration: "none" }}>
       <Container type={type}>
