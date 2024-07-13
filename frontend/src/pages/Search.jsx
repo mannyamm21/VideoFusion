@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Card from "../components/Card";
 import ChannelCard from "../components/ChannelCard";
+import VideoCard from "../components/VideoCard";
 
 const Container = styled.div`
   display: flex;
@@ -43,16 +44,25 @@ export default function Search() {
       })}
 
       {users.map((user) => (
-        <ChannelCard
-          key={user._id}
-          channelId={user._id}
-          avatar={user.avatar}
-          channelName={user.name}
-          username={user.username}
-          videoCount={user.videos.length}
-          subscriber={user.subscribers}
-        />
+        <>
+          <ChannelCard
+            key={user._id}
+            channelId={user._id}
+            avatar={user.avatar}
+            channelName={user.name}
+            username={user.username}
+            videoCount={user.videos.length}
+            subscriber={user.subscribers}
+          />
+        </>
       ))}
+      <div></div>
+
+      {users.map((user) =>
+        user.videos.map((video) => (
+          <VideoCard key={video._id} videoId={video} />
+        ))
+      )}
     </Container>
   );
 }

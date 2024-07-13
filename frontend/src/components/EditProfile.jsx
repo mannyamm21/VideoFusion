@@ -136,14 +136,14 @@ const EditProfile = ({ setOpen }) => {
       if (avatarFile) {
         const avatarFormData = new FormData();
         avatarFormData.append("avatar", avatarFile);
-        await axios.patch("/users/avatar", avatarFormData);
+        await axios.patch(`/users/avatar/${userId}`, avatarFormData);
       }
 
       // Update cover image if selected
       if (coverFile) {
         const coverFormData = new FormData();
         coverFormData.append("coverImage", coverFile);
-        await axios.patch("/users/coverImage", coverFormData);
+        await axios.patch(`/users/coverImage/${userId}`, coverFormData);
       }
 
       // Update user details (name, username, email)

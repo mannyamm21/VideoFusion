@@ -68,6 +68,10 @@ export default function Comments({ videoId }) {
     }
   };
 
+  const handleDeleteComment = (commentId) => {
+    setComments(comments.filter((comment) => comment._id !== commentId));
+  };
+
   return (
     <Container>
       <NewComment>
@@ -83,7 +87,11 @@ export default function Comments({ videoId }) {
         </SendButton>
       </NewComment>
       {comments.map((comment) => (
-        <Comment key={comment._id} comment={comment} />
+        <Comment
+          key={comment._id}
+          comment={comment}
+          onDelete={handleDeleteComment}
+        />
       ))}
     </Container>
   );

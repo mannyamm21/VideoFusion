@@ -48,7 +48,7 @@ const Text = styled.span`
   font-size: 14px;
 `;
 
-const Comment = ({ comment }) => {
+const Comment = ({ comment, onDelete }) => {
   const [channel, setChannel] = useState({});
   const { currentUser } = useSelector((state) => state.user);
 
@@ -66,9 +66,10 @@ const Comment = ({ comment }) => {
 
   const handleDeleteComment = async () => {
     try {
-      await axios.delete(`/comments/${comment._id}`, {
+      await axios.delete(`/comment/${comment._id}`, {
         headers: { Authorization: `Bearer ${currentUser.token}` },
       });
+      onDelete(comment._id);
     } catch (error) {
       console.log("Error deleting comment:", error);
     }

@@ -66,7 +66,7 @@ const VideoCount = styled.div`
 `;
 
 const Subscribe = styled.button`
-  background-color: #cc0000;
+  background-color: ${({ subscribed }) => (subscribed ? "#ccc" : "#cc0000")};
   color: white;
   border: none;
   border-radius: 4px;
@@ -81,7 +81,7 @@ const Subscribe = styled.button`
   }
 
   &:hover {
-    background-color: #ff0000;
+    background-color: ${({ subscribed }) => (subscribed ? "#bbb" : "#ff0000")};
   }
 `;
 
@@ -95,11 +95,21 @@ const ChannelCard = ({
 }) => {
   const { currentUser } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+
+  // Check if the user is subscribed
+  const subscribed = currentUser?.subscribedUsers?.includes(channelId);
+
   const handleSub = async () => {
-    currentUser.subscribedUsers.includes(channelId)
-      ? await axios.put(`/users/unsub/${channelId}`)
-      : await axios.put(`/users/sub/${channelId}`);
-    dispatch(subscription(channelId));
+    try {
+      if (subscribed) {
+        await axios.put(`/users/unsub/${channelId}`);
+      } else {
+        await axios.put(`/users/sub/${channelId}`);
+      }
+      dispatch(subscription(channelId)); // Update Redux state
+    } catch (error) {
+      console.error("Error during subscription action:", error);
+    }
   };
 
   return (
@@ -114,14 +124,8 @@ const ChannelCard = ({
           <VideoCount>{videoCount} Videos</VideoCount>
           <VideoCount>{subscriber} Subscribers</VideoCount>
         </Info>
-        <Subscribe
-          onClick={handleSub}
-          subscribed={currentUser?.subscribedUsers?.includes(channelId)}
-        >
-          {" "}
-          {currentUser?.subscribedUsers?.includes(channelId)
-            ? "SUBSCRIBED"
-            : "SUBSCRIBE"}
+        <Subscribe onClick={handleSub} subscribed={subscribed}>
+          {subscribed ? "SUBSCRIBED" : "SUBSCRIBE"}
         </Subscribe>
       </Channelcard>
     </Container>

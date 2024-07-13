@@ -102,32 +102,37 @@ export const dislike = async (req, res, next) => {
 }
 
 export const updateUserAvatar = asyncHandler(async (req, res) => {
+    const userId = req.params.id;
     const avatarLocalPath = req.file?.path;
 
     if (!avatarLocalPath) {
         throw new ApiError(400, "Avatar file is missing");
     }
 
+    // TODO: delete old image - assignment
+
     const avatar = await uploadOnCloudinary(avatarLocalPath);
 
-    if (!avatar || !avatar.url) {
+    if (!avatar.url) {
         throw new ApiError(400, "Error while uploading avatar");
     }
 
     const user = await User.findByIdAndUpdate(
-        req.user?._id,
+        userId,  // Use the authenticated user's ID directly
         {
             $set: {
                 avatar: avatar.url
             }
         },
         { new: true }
-    ).select("-password");
-
-    return res.status(200).json(new ApiResponse(200, user, "Avatar updated successfully"));
+    );
+    return res.status(200).json(new ApiResponse(200, user, "Avatar image updated successfully"));
 });
 
+
+
 export const updateUserCoverImage = asyncHandler(async (req, res) => {
+    const userId = req.params.id;
     const coverImageLocalPath = req.file?.path
 
     if (!coverImageLocalPath) {
@@ -138,22 +143,20 @@ export const updateUserCoverImage = asyncHandler(async (req, res) => {
 
 
     const coverImage = await uploadOnCloudinary(coverImageLocalPath)
-
     if (!coverImage.url) {
         throw new ApiError(400, "Error while uploading on avatar")
 
     }
 
     const user = await User.findByIdAndUpdate(
-        req.user?._id,
+        userId,
         {
             $set: {
                 coverImage: coverImage.url
             }
         },
         { new: true }
-    ).select("-password")
-
+    )
     return res
         .status(200)
         .json(

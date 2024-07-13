@@ -120,7 +120,8 @@ export default function SignIn() {
           })
           .then((res) => {
             console.log(res);
-            dispatch(loginSuccess(res.data.data)); // Assuming res.data.data contains the user object
+            dispatch(loginSuccess(res.data.data));
+            navigate("/"); // Assuming res.data.data contains the user object
           });
       })
       .catch((error) => {

@@ -6,7 +6,7 @@ export const userSlice = createSlice({
     initialState: {
         currentUser: {
             savedVideos: [], // Ensure savedVideos is initialized as an array
-            subscribedUsers: [],
+            currentUser: null,
             loading: false,
             error: false,
         },

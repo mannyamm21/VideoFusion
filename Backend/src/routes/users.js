@@ -34,7 +34,7 @@ router.put('/unsavedVideos/:videoId', verifyToken, unsaveVideo);
 // Define route to get saved videos
 router.get('/:id/savedVideos', getSavedVideos);
 
-router.route("/avatar").patch(verifyToken, upload.single("avatar"), updateUserAvatar)
-router.route("/coverImage").patch(verifyToken, upload.single("coverImage"), updateUserCoverImage)
+router.patch("/avatar/:id", verifyToken, upload.single("avatar"), updateUserAvatar)
+router.patch("/coverImage/:id", verifyToken, upload.single("coverImage"), updateUserCoverImage)
 
 export default router;

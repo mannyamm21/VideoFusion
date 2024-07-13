@@ -94,7 +94,6 @@ export default function Navbar() {
       console.error("Failed to sign out", error);
     }
   };
-
   return (
     <>
       <Container>
@@ -103,11 +102,9 @@ export default function Navbar() {
             <Input
               placeholder="Search"
               onChange={(e) => setQ(e.target.value)}
-            />
-            <SearchOutlinedIcon
-              onClick={() => navigate(`/search?q=${q}`)}
               onKeyPress={(e) => e.key === "Enter"}
             />
+            <SearchOutlinedIcon onClick={() => navigate(`/search?q=${q}`)} />
           </Search>
           {currentUser ? (
             <User>

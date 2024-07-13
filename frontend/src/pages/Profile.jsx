@@ -90,11 +90,13 @@ const Hr = styled1.hr`
   border: 0.5px solid ${({ theme }) => theme.soft};
 `;
 
-const ColorButton = styled(Button)(({ theme, subscribed }) => ({
-  color: theme.palette.getContrastText(subscribed ? grey[500] : red[900]),
-  backgroundColor: subscribed ? grey[500] : red[800],
+const ColorButton = styled(Button, {
+  shouldForwardProp: (prop) => prop !== "$subscribed",
+})(({ theme, $subscribed }) => ({
+  color: theme.palette.getContrastText($subscribed ? grey[500] : red[900]),
+  backgroundColor: $subscribed ? grey[500] : red[800],
   "&:hover": {
-    backgroundColor: subscribed ? grey[600] : red[700],
+    backgroundColor: $subscribed ? grey[600] : red[700],
   },
   marginTop: "10px",
   position: "absolute",
@@ -186,7 +188,7 @@ const Profile = () => {
           <ColorButton
             variant="contained"
             onClick={handleSub}
-            subscribed={currentUser?.subscribedUsers?.includes(channel._id)}
+            $subscribed={currentUser?.subscribedUsers?.includes(channel._id)}
           >
             {currentUser?.subscribedUsers?.includes(channel._id)
               ? "SUBSCRIBED"

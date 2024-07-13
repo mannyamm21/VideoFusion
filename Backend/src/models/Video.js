@@ -18,11 +18,11 @@ const videoSchema = new Schema({
         required: true,
     },
     imgUrl: {
-        type: String, // cloudinary
+        type: String,
         required: true,
     },
     videoUrl: {
-        type: String, // cloudinary
+        type: String,
     },
     views: {
         type: Number,

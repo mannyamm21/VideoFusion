@@ -215,7 +215,7 @@ export default function Video() {
                   <ThumbUpIcon />
                 ) : (
                   <ThumbUpOutlinedIcon />
-                )}{" "}
+                )}
                 {currentVideo?.likes?.length}
               </ButtonStyled>
               <ButtonStyled onClick={handleDislike}>
@@ -224,7 +224,6 @@ export default function Video() {
                 ) : (
                   <ThumbDownOffAltOutlinedIcon />
                 )}{" "}
-                Dislike
               </ButtonStyled>
               <ButtonStyled onClick={() => setOpen(true)}>
                 <ReplyOutlinedIcon /> Share
