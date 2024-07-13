@@ -4,7 +4,7 @@ import cookieParser from "cookie-parser"
 const app = express()
 
 app.use(cors({
-    origin: process.env.CORS_ORIGIN, // or process.env.CORS_ORIGIN
+    origin: process.env.CORS_ORIGIN, // or 
     credentials: true
 }))
 
@@ -34,6 +34,6 @@ app.use("/api/v1/videos", videoRouter)
 app.use("/api/v1/comment", commentRouter)
 app.use("/api/v1/auth", authRouter)
 
-//http://localhost:5173/api/v1/
+
 
 export { app }  
