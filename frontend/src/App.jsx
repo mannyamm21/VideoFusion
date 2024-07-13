@@ -17,6 +17,8 @@ import SignInn from "./pages/SignInn";
 
 axios.defaults.baseURL = "http://localhost:5000/api/v1"; //http://localhost:5000/api/v1 //https://videofusion-backend.onrender.com/api/v1
 
+// axios.defaults.baseURL = "https://videofusion-backend.onrender.com/api/v1";                 //http://localhost:5000/api/v1
+
 axios.defaults.withCredentials = true;
 
 const Container = styled.div`
