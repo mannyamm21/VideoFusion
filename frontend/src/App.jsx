@@ -5,7 +5,6 @@ import Menu from "./components/Menu";
 import Navbar from "./components/Navbar";
 import { darkTheme, lightTheme } from "./lib/utils/Theme";
 import Home from "./pages/Home";
-import SignIn from "./pages/SignIn";
 import Video from "./pages/Video";
 import axios from "axios";
 import Search from "./pages/Search";
@@ -13,8 +12,10 @@ import Profile from "./pages/Profile";
 import { useSelector } from "react-redux";
 import Categories from "./pages/Categories";
 import SavedVideo from "./components/SavedVideo";
+import SignUp from "./pages/SignUp";
+import SignInn from "./pages/SignInn";
 
-axios.defaults.baseURL = "http://localhost:5000/api/v1"; //http://localhost:5000/api/v1
+axios.defaults.baseURL = "http://localhost:5000/api/v1"; //http://localhost:5000/api/v1 //https://videofusion-backend.onrender.com/api/v1
 
 axios.defaults.withCredentials = true;
 
@@ -52,9 +53,10 @@ function App() {
                   <Route path="search" element={<Search />} />
                   <Route path="category/:category" element={<Categories />} />
                   <Route path="savedVideos/:userId" element={<SavedVideo />} />
+                  <Route path="sign-up" element={<SignUp />} />
                   <Route
                     path="sign-in"
-                    element={currentUser ? <Home /> : <SignIn />}
+                    element={currentUser ? <Home /> : <SignInn />}
                   />
                   <Route path="video/:id" element={<Video />} />
                 </Route>

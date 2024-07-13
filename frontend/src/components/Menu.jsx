@@ -37,7 +37,7 @@ const Logo = styled.div`
   align-items: center;
   gap: 5px;
   font-weight: bold;
-  margin-bottom: 25px;
+  margin-bottom: 30px;
   font-size: 22px;
 `;
 

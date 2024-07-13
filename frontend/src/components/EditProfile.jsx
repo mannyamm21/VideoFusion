@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import Button from "@mui/material/Button";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+
 import { useSelector } from "react-redux";
+import CloseIcon from "@mui/icons-material/Close";
+import FileUploader from "./FileUploader";
 
 const Button1 = styled.button`
   border-radius: 3px;
@@ -11,8 +12,8 @@ const Button1 = styled.button`
   padding: 10px 20px;
   font-weight: 500;
   cursor: pointer;
-  background-color: ${({ theme }) => theme.soft};
-  color: ${({ theme }) => theme.textSoft};
+  background-color: #2cb5a0;
+  color: ${({ theme }) => theme.text};
 `;
 
 const Close = styled.div`
@@ -25,18 +26,20 @@ const Close = styled.div`
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   background-color: #000000a7;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 1000;
 `;
 
 const Wrapper = styled.div`
   width: 600px;
-  height: 600px;
+  height: 620px;
+  border-radius: 7px;
   background-color: ${({ theme }) => theme.bgLighter};
   color: ${({ theme }) => theme.text};
   padding: 20px;
@@ -44,10 +47,12 @@ const Wrapper = styled.div`
   flex-direction: column;
   gap: 20px;
   position: relative;
+  overflow-y: auto; /* Add this to enable scrolling within the wrapper */
 `;
 
 const Title = styled.h1`
   text-align: center;
+  font-size: 18px;
 `;
 
 const Input = styled.input`
@@ -58,18 +63,6 @@ const Input = styled.input`
   background-color: transparent;
   z-index: 999;
   width: 100%;
-`;
-
-const VisuallyHiddenInput = styled.input`
-  clip: rect(0 0 0 0);
-  clip-path: inset(50%);
-  height: 1px;
-  overflow: hidden;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  white-space: nowrap;
-  width: 1px;
 `;
 
 const EditProfile = ({ setOpen }) => {
@@ -161,7 +154,9 @@ const EditProfile = ({ setOpen }) => {
       <Container>
         <Wrapper>
           <Title>Edit Your Profile</Title>
-          <Close onClick={() => setOpen(false)}>X</Close>
+          <Close onClick={() => setOpen(false)}>
+            <CloseIcon />
+          </Close>
           <Input
             type="text"
             placeholder="Name"
@@ -178,36 +173,24 @@ const EditProfile = ({ setOpen }) => {
           />
           <Input
             type="text"
-            placeholder="Email"
+            placeholder={formData.email}
             name="email"
-            value={formData.email}
             onChange={handleInputChange}
+            disabled
           />
           {error && <p style={{ color: "red" }}>{error}</p>}
-          <Button
-            component="label"
-            variant="contained"
-            startIcon={<CloudUploadIcon />}
-          >
-            <VisuallyHiddenInput
-              type="file"
-              onChange={handleAvatarChange}
-              accept="image/*"
-            />
-            {avatarFileName || "Select Avatar Image"}
-          </Button>
-          <Button
-            component="label"
-            variant="contained"
-            startIcon={<CloudUploadIcon />}
-          >
-            <VisuallyHiddenInput
-              type="file"
-              onChange={handleCoverChange}
-              accept="image/*"
-            />
-            {coverFileName || "Select Cover Image"}
-          </Button>
+          <FileUploader
+            name={"Avatar Image"}
+            id="avatarFile"
+            fileName={avatarFileName}
+            onChange={handleAvatarChange}
+          />
+          <FileUploader
+            name={"Cover Image"}
+            id="coverFile"
+            fileName={coverFileName}
+            onChange={handleCoverChange}
+          />
           <Button1 onClick={handleSubmit} variant="contained">
             Save
           </Button1>

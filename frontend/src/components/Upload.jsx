@@ -10,17 +10,20 @@ import app from "../lib/utils/firebase";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import categories from "../lib/utils/categories";
+import CloseIcon from "@mui/icons-material/Close";
+import FileUploader from "./FileUploader";
 
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   background-color: #000000a7;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 1000; /* Ensure it stays above other content */
 `;
 
 const Wrapper = styled.div`
@@ -33,6 +36,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   gap: 20px;
   position: relative;
+  overflow-y: auto; /* Add this to enable scrolling within the wrapper */
 `;
 
 const Close = styled.div`
@@ -44,6 +48,7 @@ const Close = styled.div`
 
 const Title = styled.h1`
   text-align: center;
+  font-size: 20px;
 `;
 
 const Input = styled.input`
@@ -69,8 +74,8 @@ const Button = styled.button`
   padding: 10px 20px;
   font-weight: 500;
   cursor: pointer;
-  background-color: ${({ theme }) => theme.soft};
-  color: ${({ theme }) => theme.textSoft};
+  background-color: #2cb5a0;
+  color: ${({ theme }) => theme.text};
 `;
 
 const Label = styled.label`
@@ -182,19 +187,30 @@ export default function Upload({ setOpen }) {
     }
   };
 
+  const handleVideoChange = (e) => {
+    setVideo(e.target.files[0]);
+  };
+
+  const handleImgChange = (e) => {
+    setImg(e.target.files[0]);
+  };
+
   return (
     <Container>
       <Wrapper>
-        <Close onClick={() => setOpen(false)}>X</Close>
+        <Close onClick={() => setOpen(false)}>
+          <CloseIcon />
+        </Close>
         <Title>Upload a new Video</Title>
         <Label>Video:</Label>
         {videoPerc > 0 ? (
           "Uploading:" + videoPerc + "%"
         ) : (
-          <Input
-            type="file"
-            accept="video/*"
-            onChange={(e) => setVideo(e.target.files[0])}
+          <FileUploader
+            id="videoFile"
+            name="Upload Video"
+            fileName={video?.name}
+            onChange={handleVideoChange}
           />
         )}
         <Input
@@ -229,10 +245,11 @@ export default function Upload({ setOpen }) {
         {imgPerc > 0 ? (
           "Uploading:" + imgPerc + "%"
         ) : (
-          <Input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setImg(e.target.files[0])}
+          <FileUploader
+            id="imgFile"
+            name="Upload Image"
+            fileName={img?.name}
+            onChange={handleImgChange}
           />
         )}
         <Button onClick={handleUpload}>Upload</Button>

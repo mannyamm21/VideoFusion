@@ -1,4 +1,3 @@
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import VideoCallOutlinedIcon from "@mui/icons-material/VideoCallOutlined";
 import { Link, useNavigate } from "react-router-dom";
@@ -9,9 +8,11 @@ import Upload from "./Upload";
 import axios from "axios";
 import { logout } from "../Context/userSlice";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-import { purple } from "@mui/material/colors";
-import Button from "@mui/material/Button";
-import { styled } from "@mui/material/styles";
+import LoginIcon from "@mui/icons-material/Login";
+import LogoutIcon from "@mui/icons-material/Logout";
+// import { purple } from "@mui/material/colors";
+// import Button from "@mui/material/Button";
+// import { styled } from "@mui/material/styles";
 
 const Container = styled1.div`
   position: sticky;
@@ -70,13 +71,36 @@ const Avatar = styled1.img`
   background-color: #999;
 `;
 
-const ColorButton = styled(Button)(({ theme }) => ({
-  color: theme.palette.getContrastText(purple[500]),
-  backgroundColor: purple[800],
-  "&:hover": {
-    backgroundColor: purple[700],
-  },
-}));
+const LoginButton = styled1.a`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background-color: rgba(167, 139, 250, 1);
+  padding: 0.590rem 0.8rem;
+  text-align: center;
+  color: rgba(255, 255, 255, 1);
+  outline: 0;
+  transition: all 0.2s ease;
+  text-decoration: none;
+`;
+
+const Icon = styled1.svg`
+  height: 1.5rem;
+  width: 1.5rem;
+`;
+
+const Texts = styled1.span`
+  margin-left: 0.3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1;
+`;
+
+const Text2 = styled1.span`
+  font-weight: 600;
+`;
 
 export default function Navbar() {
   const { currentUser } = useSelector((state) => state.user);
@@ -113,16 +137,25 @@ export default function Navbar() {
               <Link to={currentUser?._id ? `/profile/${currentUser._id}` : "#"}>
                 <Avatar src={currentUser?.avatar || "/default-avatar.png"} />
               </Link>
-              <ColorButton variant="contained" onClick={handleSignOut}>
-                Sign Out
-              </ColorButton>
+              <LoginButton onClick={handleSignOut}>
+                <Icon>
+                  <LogoutIcon />
+                </Icon>
+                <Texts>
+                  <Text2>Sign Out</Text2>
+                </Texts>
+              </LoginButton>
             </User>
           ) : (
             <Link to="sign-in" style={{ textDecoration: "none" }}>
-              <ColorButton variant="contained">
-                <AccountCircleOutlinedIcon />
-                {"  +  "}SIGN IN
-              </ColorButton>
+              <LoginButton>
+                <Icon>
+                  <LoginIcon />
+                </Icon>
+                <Texts>
+                  <Text2>SIGN IN</Text2>
+                </Texts>
+              </LoginButton>
             </Link>
           )}
         </Wrapper>

@@ -50,7 +50,7 @@ export default function Search() {
           subscriber={user.subscribers}
         />
       ))}
-
+      <div></div>
       {users.map((user) =>
         user.videos.map((video) => <VideoCard key={video} videoId={video} />)
       )}
