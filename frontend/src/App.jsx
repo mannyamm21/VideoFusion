@@ -14,7 +14,7 @@ import { useSelector } from "react-redux";
 import Categories from "./pages/Categories";
 import SavedVideo from "./components/SavedVideo";
 
-axios.defaults.baseURL = "http://localhost:5000/api/v1"; //http://localhost:5000/api/v1
+axios.defaults.baseURL = "https://videofusion-backend.onrender.com/api/v1";                 //http://localhost:5000/api/v1
 
 axios.defaults.withCredentials = true;
 
