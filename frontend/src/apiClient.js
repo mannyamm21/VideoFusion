@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const apiClient = axios.create({
     //  baseURL: "http://localhost:8000/api/v1",
-    baseURL: "https://videofusionbackend.onrender.com/api/v1",
+    baseURL: "https://videofusionwebo-backend.onrender.com/api/v1",
     withCredentials: true, // This ensures cookies are sent with requests
     headers: {
         'Content-Type': 'application/json',
